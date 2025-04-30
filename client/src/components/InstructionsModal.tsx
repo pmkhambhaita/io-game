@@ -40,15 +40,25 @@ export default function InstructionsModal({ onClose }: InstructionsModalProps) {
           <div className="bg-gray-700 p-4 rounded-lg">
             <h3 className="font-semibold text-lg mb-2 text-blue-300">Game Rules:</h3>
             <ol className="list-decimal list-inside space-y-2 text-gray-200">
-              <li>Examine the first two input-output pairs which are revealed as hints.</li>
+              <li>Each card shows an input. Click on the card (or press Space) to reveal the output.</li>
               <li>Try to deduce the pattern that transforms each input into its corresponding output.</li>
-              <li>Click on the locked output cards to reveal more outputs and confirm your theory.</li>
-              <li>Click on the "Hidden Rule" card to reveal the actual rule when you're ready.</li>
+              <li>Completed pairs will appear in the table at the top for reference.</li>
+              <li>Click on the "Hidden Rule" card (or press R) to reveal the actual rule when you're ready.</li>
             </ol>
           </div>
           
+          <div className="bg-gray-700 p-4 rounded-lg">
+            <h3 className="font-semibold text-lg mb-2 text-purple-300">Keyboard Shortcuts:</h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-200">
+              <li><span className="font-mono bg-gray-800 px-2 rounded">Space</span> - Flip the current card</li>
+              <li><span className="font-mono bg-gray-800 px-2 rounded">R</span> - Reveal or hide the rule</li>
+              <li><span className="font-mono bg-gray-800 px-2 rounded">←</span> - Go to the previous card</li>
+              <li><span className="font-mono bg-gray-800 px-2 rounded">→</span> - Go to the next card</li>
+            </ul>
+          </div>
+          
           <p className="text-sm text-gray-400">
-            Challenge yourself to guess the rule before revealing all the outputs!
+            Challenge yourself to guess the rule before revealing it!
           </p>
         </div>
         

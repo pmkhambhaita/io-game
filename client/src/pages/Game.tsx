@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import GameHeader from "@/components/GameHeader";
-import GameContainer from "@/components/GameContainer";
+import FlashcardGameContainer from "@/components/FlashcardGameContainer";
 import InstructionsModal from "@/components/InstructionsModal";
 import ManagePuzzlesModal from "@/components/ManagePuzzlesModal";
 import PuzzleFormModal from "@/components/PuzzleFormModal";
@@ -88,7 +88,7 @@ export default function Game() {
         onManagePuzzlesClick={() => setIsManagePuzzlesOpen(true)}
       />
       
-      <GameContainer 
+      <FlashcardGameContainer 
         isLoading={isLoading}
         puzzle={currentPuzzle}
         puzzleNumber={selectedPuzzleIndex + 1}

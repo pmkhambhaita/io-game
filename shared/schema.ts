@@ -38,8 +38,8 @@ export const puzzleFormSchema = z.object({
   rule: z.string().min(1, { message: "Rule is required" }),
   inputs: z.array(
     z.string().min(1, { message: "Input value is required" })
-  ).length(6, { message: "Exactly 6 inputs are required" }),
+  ).min(2, { message: "At least 2 inputs are required" }).max(20, { message: "Maximum 20 inputs allowed" }),
   outputs: z.array(
     z.string().min(1, { message: "Output value is required" })
-  ).length(6, { message: "Exactly 6 outputs are required" }),
+  ).min(2, { message: "At least 2 outputs are required" }).max(20, { message: "Maximum 20 outputs allowed" }),
 });
