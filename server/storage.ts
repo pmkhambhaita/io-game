@@ -74,7 +74,25 @@ export class DatabaseStorage implements IStorage {
       .delete(puzzles)
       .where(eq(puzzles.id, id))
       .returning({ id: puzzles.id });
+    
+    // Reset the sequence after deletion to ensure new IDs are sequential
+    if (result.length > 0) {
+      await this.resetSequence();
+    }
+    
     return result.length > 0;
+  }
+  
+  // Reset the auto-increment sequence to ensure new IDs are sequential
+  async resetSequence(): Promise<void> {
+    try {
+      // This SQL will reset the sequence for the puzzles table
+      await db.execute(
+        `SELECT setval(pg_get_serial_sequence('puzzles', 'id'), COALESCE((SELECT MAX(id) FROM puzzles), 0) + 1, false);`
+      );
+    } catch (error) {
+      console.error('Failed to reset sequence:', error);
+    }
   }
 }
 

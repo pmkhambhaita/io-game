@@ -37,8 +37,30 @@ export default function ImportPuzzlesModal({ onClose }: ImportPuzzlesModalProps)
       // Validate JSON format
       let parsedData: ImportPuzzle | ImportPuzzle[];
       try {
-        parsedData = JSON.parse(jsonInput);
+        // Clean up the input to handle multiple JSON objects not in an array
+        const cleanedInput = jsonInput.trim();
+        
+        // Handle regular JSON parsing first
+        try {
+          parsedData = JSON.parse(cleanedInput);
+        } catch (error) {
+          // If regular parsing fails, check if there are multiple JSON objects
+          if (cleanedInput.match(/\}\s*\{/)) {
+            // Try to parse as multiple separate objects
+            const objectsText = cleanedInput.replace(/\}\s*\{/g, '}|{');
+            const objects = objectsText.split('|');
+            
+            if (objects.length > 1) {
+              parsedData = objects.map(obj => JSON.parse(obj));
+            } else {
+              throw error; // Re-throw if splitting didn't help
+            }
+          } else {
+            throw error; // Re-throw the original error
+          }
+        }
       } catch (error) {
+        console.error('Parse error:', error);
         setValidationError("Invalid JSON format. Please check your input.");
         setIsImporting(false);
         return;
@@ -117,16 +139,30 @@ export default function ImportPuzzlesModal({ onClose }: ImportPuzzlesModalProps)
 
   // Sample JSON template
   const sampleJsonTemplate = `{
-  "rule": "Floor of (number / sum of digits) (Handle sum=0 by outputting 0).",
+  "rule": "Add the digit sum to the number",
   "examples": [
-    {"input": 12, "output": 4},
-    {"input": 15, "output": 2}
+    {"input": 10, "output": 11},
+    {"input": 15, "output": 21}
   ],
   "tests": [
-    {"input": 1, "output": 1},
-    {"input": 10, "output": 10},
-    {"input": 18, "output": 2},
-    {"input": 20, "output": 10}
+    {"input": 1, "output": 2},
+    {"input": 24, "output": 30},
+    {"input": 39, "output": 51},
+    {"input": 100, "output": 101}
+  ]
+}
+
+{
+  "rule": "Multiply by 2 and add the original number",
+  "examples": [
+    {"input": 5, "output": 15},
+    {"input": 10, "output": 30}
+  ],
+  "tests": [
+    {"input": 1, "output": 3},
+    {"input": 7, "output": 21},
+    {"input": 12, "output": 36},
+    {"input": 20, "output": 60}
   ]
 }`;
 
@@ -149,7 +185,7 @@ export default function ImportPuzzlesModal({ onClose }: ImportPuzzlesModalProps)
         
         <div className="space-y-4">
           <p className="text-gray-300">
-            Paste JSON data below to import puzzles. You can import a single puzzle or an array of puzzles.
+            Paste JSON data below to import puzzles. You can import a single puzzle, multiple puzzles pasted one after another, or an array of puzzles.
           </p>
           
           <Textarea 
