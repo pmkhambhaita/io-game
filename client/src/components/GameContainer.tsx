@@ -52,7 +52,7 @@ export default function GameContainer({
           <Skeleton className="h-10 w-32 rounded-full" />
           <Skeleton className="h-10 w-10 rounded-full" />
         </div>
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-6 md:p-10">
+        <div className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-6 md:p-10">
           <Skeleton className="h-28 w-full mb-8 rounded-xl" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -81,7 +81,7 @@ export default function GameContainer({
   if (!puzzle) {
     return (
       <div className="container mx-auto px-4 py-6 md:py-10 max-w-6xl">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-10 text-center">
+        <div className="bg-gray-800 text-white rounded-2xl shadow-xl overflow-hidden p-10 text-center">
           <h2 className="text-2xl font-semibold mb-4">No Puzzles Available</h2>
           <p className="mb-6">Create your first puzzle to get started!</p>
           <Button onClick={onNextClick}>Manage Puzzles</Button>
@@ -97,19 +97,19 @@ export default function GameContainer({
         <Button
           variant="ghost"
           size="icon"
-          className="rounded-full bg-white shadow-md hover:bg-gray-50 text-foreground"
+          className="rounded-full bg-gray-800 shadow-md hover:bg-gray-700 text-white"
           onClick={onPrevClick}
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
         
-        <div className="bg-white rounded-full shadow-md px-5 py-2 flex items-center">
+        <div className="bg-gray-800 text-white rounded-full shadow-md px-5 py-2 flex items-center">
           <span className="font-medium mr-2">Puzzle {puzzleNumber}</span>
           <div className="flex space-x-1">
             {Array(totalPuzzles).fill(0).map((_, i) => (
               <span 
                 key={`dot-${i}`}
-                className={`w-2 h-2 rounded-full ${i === puzzleNumber - 1 ? 'bg-primary' : 'bg-gray-300'}`}
+                className={`w-2 h-2 rounded-full ${i === puzzleNumber - 1 ? 'bg-primary' : 'bg-gray-500'}`}
               />
             ))}
           </div>
@@ -118,7 +118,7 @@ export default function GameContainer({
         <Button
           variant="ghost"
           size="icon"
-          className="rounded-full bg-white shadow-md hover:bg-gray-50 text-foreground"
+          className="rounded-full bg-gray-800 shadow-md hover:bg-gray-700 text-white"
           onClick={onNextClick}
         >
           <ChevronRight className="h-5 w-5" />
@@ -126,26 +126,38 @@ export default function GameContainer({
       </div>
 
       {/* Game Board */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="bg-gradient-to-br from-[#f8f9fa] to-primary/5 p-6 md:p-10">
+      <div className="bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 md:p-10">
           {/* Rule Box */}
           <div className="mb-8">
             <motion.div 
-              className="mx-auto max-w-2xl perspective-1000"
+              className="mx-auto max-w-2xl"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <div 
-                className={`rounded-xl h-28 w-full shadow-lg cursor-pointer transition-transform duration-500 transform-style-3d relative ${isRuleRevealed ? 'rotate-y-180' : ''}`}
+                className="rounded-xl h-28 w-full shadow-lg cursor-pointer relative overflow-hidden"
                 onClick={() => setIsRuleRevealed(!isRuleRevealed)}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 to-primary/90 rounded-xl flex items-center justify-center text-white backface-hidden">
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center text-white transition-transform duration-500"
+                  style={{ 
+                    transform: isRuleRevealed ? 'translateY(-100%)' : 'translateY(0)',
+                    zIndex: 2
+                  }}
+                >
                   <div className="text-center">
                     <h2 className="text-xl font-semibold">Hidden Rule</h2>
                     <p className="text-sm opacity-80">Click to reveal the pattern</p>
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#10B981]/90 to-primary/90 rounded-xl flex items-center justify-center text-white backface-hidden rotate-y-180">
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-blue-600 flex items-center justify-center text-white transition-transform duration-500"
+                  style={{ 
+                    transform: isRuleRevealed ? 'translateY(0)' : 'translateY(100%)',
+                    zIndex: 1
+                  }}
+                >
                   <div className="text-center px-6">
                     <h2 className="text-xl font-semibold mb-1">Rule Revealed!</h2>
                     <p id="rule-text" className="text-base">{puzzle.rule}</p>
@@ -159,12 +171,12 @@ export default function GameContainer({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in-50">
             {/* Inputs Column */}
             <div>
-              <h3 className="text-lg md:text-xl font-semibold mb-4 text-center text-primary">Inputs</h3>
+              <h3 className="text-lg md:text-xl font-semibold mb-4 text-center text-blue-400">Inputs</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {puzzle.inputs.map((input, index) => (
                   <motion.div
-                    key={`input-${index}`}
-                    className="bg-white rounded-xl p-4 shadow-md flex items-center justify-center h-24 font-semibold text-2xl"
+                    key={`input-${puzzle.id}-${index}`}
+                    className="bg-gray-700 text-white rounded-xl p-4 shadow-md flex items-center justify-center h-24 font-semibold text-2xl"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ 
@@ -183,7 +195,7 @@ export default function GameContainer({
 
             {/* Outputs Column */}
             <div>
-              <h3 className="text-lg md:text-xl font-semibold mb-4 text-center text-accent">Outputs</h3>
+              <h3 className="text-lg md:text-xl font-semibold mb-4 text-center text-purple-400">Outputs</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {puzzle.outputs.map((output, index) => {
                   // First two are always revealed
@@ -191,8 +203,8 @@ export default function GameContainer({
                   
                   return (
                     <motion.div
-                      key={`output-${index}`}
-                      className="h-24 relative perspective-1000"
+                      key={`output-${puzzle.id}-${index}`}
+                      className="h-24 relative overflow-hidden"
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ 
@@ -203,19 +215,29 @@ export default function GameContainer({
                         damping: 20 
                       }}
                     >
-                      <motion.div
-                        className={`absolute inset-0 rounded-xl shadow-md cursor-pointer ${index >= 2 ? 'cursor-pointer' : ''}`}
-                        animate={{ rotateY: isRevealed ? 180 : 0 }}
-                        transition={{ duration: 0.6 }}
+                      <div 
+                        className="absolute inset-0 rounded-xl shadow-md cursor-pointer"
                         onClick={() => index >= 2 && toggleOutput(index)}
                       >
-                        <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 to-accent/90 rounded-xl flex items-center justify-center text-white backface-hidden">
+                        <div 
+                          className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center text-white transition-transform duration-500"
+                          style={{
+                            transform: isRevealed ? 'translateY(-100%)' : 'translateY(0)',
+                            zIndex: 2
+                          }}
+                        >
                           <Lock className="h-6 w-6" />
                         </div>
-                        <div className="absolute inset-0 bg-white rounded-xl flex items-center justify-center backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
+                        <div 
+                          className="absolute inset-0 bg-gray-700 rounded-xl flex items-center justify-center text-white transition-transform duration-500"
+                          style={{
+                            transform: isRevealed ? 'translateY(0)' : 'translateY(100%)',
+                            zIndex: 1
+                          }}
+                        >
                           <span className="font-semibold text-2xl">{output}</span>
                         </div>
-                      </motion.div>
+                      </div>
                     </motion.div>
                   );
                 })}

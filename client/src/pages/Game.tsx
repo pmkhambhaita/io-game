@@ -74,7 +74,7 @@ export default function Game() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-neutral-light to-primary/5 min-h-screen font-sans text-foreground">
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen font-sans text-white">
       <GameHeader 
         onInstructionsClick={() => setIsInstructionsOpen(true)}
         onManagePuzzlesClick={() => setIsManagePuzzlesOpen(true)}
@@ -89,7 +89,7 @@ export default function Game() {
         onNextClick={handleNextPuzzle}
       />
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isInstructionsOpen && (
           <InstructionsModal onClose={() => setIsInstructionsOpen(false)} />
         )}

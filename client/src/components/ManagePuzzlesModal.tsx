@@ -27,15 +27,15 @@ export default function ManagePuzzlesModal({
 }: ManagePuzzlesModalProps) {
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="sm:max-w-2xl bg-gray-800 border-gray-700 text-white">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-primary flex items-center justify-between">
+          <DialogTitle className="text-2xl font-semibold text-blue-400 flex items-center justify-between">
             Manage Puzzles
             <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="h-6 w-6 rounded-full p-0 text-muted-foreground hover:text-destructive"
+              className="h-6 w-6 rounded-full p-0 text-gray-400 hover:text-red-400"
             >
               <X className="h-4 w-4" />
             </Button>
@@ -45,7 +45,7 @@ export default function ManagePuzzlesModal({
         <div className="mb-6">
           <Button 
             onClick={onAdd}
-            className="bg-[#10B981] hover:bg-[#0D9488] text-white"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             <Plus className="h-4 w-4 mr-2" /> Add New Puzzle
           </Button>
@@ -53,7 +53,7 @@ export default function ManagePuzzlesModal({
         
         <ScrollArea className="max-h-96 pr-2 space-y-3">
           {puzzles.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-center py-8 text-gray-400">
               No puzzles available. Create your first puzzle!
             </div>
           ) : (
@@ -61,14 +61,14 @@ export default function ManagePuzzlesModal({
               {puzzles.map((puzzle) => (
                 <motion.div
                   key={puzzle.id}
-                  className="bg-muted rounded-lg p-4 flex justify-between items-center"
+                  className="bg-gray-700 rounded-lg p-4 flex justify-between items-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
                   <div>
-                    <h3 className="font-medium">Puzzle {puzzle.id}</h3>
-                    <p className="text-sm text-muted-foreground truncate max-w-md">
+                    <h3 className="font-medium text-gray-200">Puzzle {puzzle.id}</h3>
+                    <p className="text-sm text-gray-400 truncate max-w-md">
                       Rule: {puzzle.rule}
                     </p>
                   </div>
@@ -77,7 +77,7 @@ export default function ManagePuzzlesModal({
                       variant="ghost" 
                       size="icon"
                       onClick={() => onEdit(puzzle)}
-                      className="text-primary hover:text-primary/80 transition-colors"
+                      className="text-blue-400 hover:text-blue-300 hover:bg-gray-600 transition-colors"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -85,7 +85,7 @@ export default function ManagePuzzlesModal({
                       variant="ghost" 
                       size="icon"
                       onClick={() => onDelete(puzzle.id)}
-                      className="text-destructive hover:text-destructive/80 transition-colors"
+                      className="text-red-400 hover:text-red-300 hover:bg-gray-600 transition-colors"
                     >
                       <Trash className="h-4 w-4" />
                     </Button>
@@ -96,7 +96,7 @@ export default function ManagePuzzlesModal({
           )}
         </ScrollArea>
         
-        <Button onClick={onClose} className="w-full mt-4">
+        <Button onClick={onClose} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white">
           Done
         </Button>
       </DialogContent>

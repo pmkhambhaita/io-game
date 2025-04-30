@@ -11,10 +11,10 @@ export default function GameHeader({
   onManagePuzzlesClick 
 }: GameHeaderProps) {
   return (
-    <header className="py-4 px-6 md:px-10 flex justify-between items-center">
+    <header className="py-4 px-6 md:px-10 flex justify-between items-center bg-gray-800/50 backdrop-blur-sm shadow-md">
       <div className="flex items-center">
         <h1 className="text-2xl md:text-3xl font-bold">
-          <span className="text-secondary">Input</span>-<span className="text-primary">Output</span>
+          <span className="text-blue-400">Input</span>-<span className="text-purple-400">Output</span>
         </h1>
       </div>
 
@@ -22,7 +22,7 @@ export default function GameHeader({
         <Button 
           variant="outline" 
           onClick={onInstructionsClick}
-          className="flex items-center"
+          className="flex items-center bg-gray-700 border-gray-600 hover:bg-gray-600 text-white"
         >
           <HelpCircle className="h-4 w-4 mr-2" />
           <span className="hidden sm:inline">How to Play</span>
@@ -30,7 +30,7 @@ export default function GameHeader({
         
         <Button 
           onClick={onManagePuzzlesClick}
-          className="flex items-center"
+          className="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white"
         >
           <Settings className="h-4 w-4 mr-2" />
           <span className="hidden sm:inline">Manage Puzzles</span>

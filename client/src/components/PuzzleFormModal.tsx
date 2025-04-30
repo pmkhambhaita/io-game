@@ -71,15 +71,15 @@ export default function PuzzleFormModal({
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-800 border-gray-700 text-white">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-primary flex items-center justify-between">
+          <DialogTitle className="text-2xl font-semibold text-blue-400 flex items-center justify-between">
             {isEditMode ? "Edit Puzzle" : "Add New Puzzle"}
             <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="h-6 w-6 rounded-full p-0 text-muted-foreground hover:text-destructive"
+              className="h-6 w-6 rounded-full p-0 text-gray-400 hover:text-red-400"
             >
               <X className="h-4 w-4" />
             </Button>
@@ -92,15 +92,16 @@ export default function PuzzleFormModal({
               control={form.control}
               name="rule"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="text-gray-200">
                   <FormLabel>Rule:</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="e.g., Add 2 and multiply by 3" 
+                      className="bg-gray-700 border-gray-600 text-gray-200"
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
@@ -108,7 +109,7 @@ export default function PuzzleFormModal({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Inputs */}
               <div>
-                <h3 className="font-medium mb-3">Inputs:</h3>
+                <h3 className="font-medium mb-3 text-blue-400">Inputs:</h3>
                 <div className="space-y-3">
                   {[0, 1, 2, 3, 4, 5].map((index) => (
                     <FormField
@@ -118,18 +119,18 @@ export default function PuzzleFormModal({
                       render={({ field }) => (
                         <FormItem>
                           <div className="flex">
-                            <span className="flex items-center justify-center w-8 bg-muted border border-r-0 border-input rounded-l-md">
+                            <span className="flex items-center justify-center w-8 bg-gray-700 border border-r-0 border-gray-600 rounded-l-md text-gray-300">
                               {index + 1}
                             </span>
                             <FormControl>
                               <Input
-                                className="rounded-l-none"
+                                className="rounded-l-none bg-gray-700 border-gray-600 text-gray-200"
                                 placeholder="Enter input value"
                                 {...field}
                               />
                             </FormControl>
                           </div>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -139,7 +140,7 @@ export default function PuzzleFormModal({
               
               {/* Outputs */}
               <div>
-                <h3 className="font-medium mb-3">Outputs:</h3>
+                <h3 className="font-medium mb-3 text-purple-400">Outputs:</h3>
                 <div className="space-y-3">
                   {[0, 1, 2, 3, 4, 5].map((index) => (
                     <FormField
@@ -149,18 +150,18 @@ export default function PuzzleFormModal({
                       render={({ field }) => (
                         <FormItem>
                           <div className="flex">
-                            <span className="flex items-center justify-center w-8 bg-muted border border-r-0 border-input rounded-l-md">
+                            <span className="flex items-center justify-center w-8 bg-gray-700 border border-r-0 border-gray-600 rounded-l-md text-gray-300">
                               {index + 1}
                             </span>
                             <FormControl>
                               <Input
-                                className="rounded-l-none"
+                                className="rounded-l-none bg-gray-700 border-gray-600 text-gray-200"
                                 placeholder="Enter output value"
                                 {...field}
                               />
                             </FormControl>
                           </div>
-                          <FormMessage />
+                          <FormMessage className="text-red-400" />
                         </FormItem>
                       )}
                     />
@@ -174,12 +175,14 @@ export default function PuzzleFormModal({
                 type="button" 
                 variant="outline" 
                 onClick={onClose}
+                className="border-gray-600 text-gray-300 hover:bg-gray-700"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit" 
                 disabled={isCreating || isUpdating}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white"
               >
                 {isCreating || isUpdating ? 'Saving...' : 'Save Puzzle'}
               </Button>
