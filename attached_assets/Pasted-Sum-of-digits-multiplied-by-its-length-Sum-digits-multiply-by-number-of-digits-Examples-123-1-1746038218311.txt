@@ -1,0 +1,472 @@
+Sum of digits multiplied by its length – Sum digits, multiply by number of digits.
+Examples: 123 → 18 (sum=6, len=3, 63=18), 55 → 20 (sum=10, len=2, 102=20)
+Test Inputs & Outputs:
+7 → 7 (sum=7, len=1, 7*1=7)
+10 → 2 (sum=1, len=2, 1*2=2)
+44 → 16 (sum=8, len=2, 8*2=16)
+100 → 3 (sum=1, len=3, 1*3=3)
+111 → 9 (sum=3, len=3, 3*3=9)
+505 → 30 (sum=10, len=3, 10*3=30)
+1234 → 40 (sum=10, len=4, 10*4=40)
+999 → 81 (sum=27, len=3, 27*3=81)
+If input is n, return nth triangular number – T(n) = n*(n+1)/2. (Same as Rule 8 from earlier batch).
+Examples: 4 → 10, 6 → 21
+Test Inputs & Outputs:
+1 → 1
+2 → 3
+3 → 6
+5 → 15
+7 → 28
+10 → 55
+11 → 66
+20 → 210
+Input mod number of digits – Remainder when n is divided by its digit count. (Same as Rule 38).
+Examples: 123 → 0 (123%3=0), 45 → 1 (45%2=1)
+Test Inputs & Outputs:
+7 → 0 (7%1=0)
+10 → 0 (10%2=0)
+50 → 0 (50%2=0)
+99 → 1 (99%2=1)
+101 → 2 (101%3=2)
+1000 → 0 (1000%4=0)
+2025 → 1 (2025%4=1)
+12345 → 0 (12345%5=0)
+Sum of prime digits multiplied by number of digits – Sum (2,3,5,7 digits), multiply by length.
+Examples: 123 → 15 (sum=2+3=5, len=3, 53=15), 456 → 5 (sum=5, len=3, 53=15 - Example wrong?) Recheck: 456 -> prime sum=5, len=3, result=15. 77 -> prime sum=14, len=2, result=28.
+Examples: 123 → 15, 77 → 28
+Test Inputs & Outputs:
+1 → 0 (sum=0, len=1, 0*1=0)
+2 → 2 (sum=2, len=1, 2*1=2)
+45 → 5 (sum=5, len=2, 5*2=10 - Example wrong?) Recheck: 45 -> prime sum=5, len=2, result=10.
+107 → 14 (sum=7, len=3, 7*3=21 - Example wrong?) Recheck: 107 -> prime sum=7, len=3, result=21.
+235 → 30 (sum=2+3+5=10, len=3, 10*3=30)
+4689 → 0 (sum=0, len=4, 0*4=0)
+1111 → 0 (sum=0, len=4, 0*4=0)
+2727 → 56 (sum=2+7+2+7=18, len=4, 18*4=72 - Example wrong?) Recheck: 2727 -> prime sum=18, len=4, result=72.
+Corrected Examples/Tests: (Using correct logic)
+Examples: 123 → 15, 77 → 28
+Test Inputs & Outputs:
+1 → 0
+2 → 2
+45 → 10
+107 → 21
+235 → 30
+4689 → 0
+1111 → 0
+2727 → 72
+Digit sum of cube root (rounded) – Take cube root, round to nearest integer, sum its digits.
+Examples: 8 → 2 (cbrt=2, sum=2), 26 → 3 (cbrt=2.96->3, sum=3), 60 → 4 (cbrt=3.91->4, sum=4)
+Test Inputs & Outputs:
+1 → 1 (cbrt=1->1, sum=1)
+7 → 2 (cbrt=1.91->2, sum=2)
+27 → 3 (cbrt=3->3, sum=3)
+30 → 3 (cbrt=3.1->3, sum=3)
+64 → 4 (cbrt=4->4, sum=4)
+100 → 5 (cbrt=4.64->5, sum=5)
+125 → 5 (cbrt=5->5, sum=5)
+130 → 5 (cbrt=5.06->5, sum=5)
+Sum of digits of (number raised to power of length of number) – Calc n 
+len(n)
+ , then sum its digits. (Can get huge).
+Examples: 2 → 2 (2 
+1
+ =2, sum=2), 10 → 1 (10 
+2
+ =100, sum=1), 3 → 9 (3 
+1
+ =3, sum=3. Wait, 3 
+1
+ ? len=1. Ex: 11 -> len=2. 11 
+2
+ =121, sum=4. Ex: 4 -> len=1. 4 
+1
+ =4, sum=4. Let's use 11->4, 4->4.)
+Examples: 11 → 4, 4 → 4
+Test Inputs & Outputs: (Limited by feasibility)
+1 → 1 (1 
+1
+ =1, sum=1)
+2 → 2 (2 
+1
+ =2, sum=2)
+3 → 3 (3 
+1
+ =3, sum=3)
+5 → 5 (5 
+1
+ =5, sum=5)
+10 → 1 (10 
+2
+ =100, sum=1)
+12 → 9 (12 
+2
+ =144, sum=9)
+13 → 16 (13 
+2
+ =169, sum=16)
+22 → 16 (22 
+2
+ =484, sum=16)
+32 → 10 (32 
+2
+ =1024, sum=7)
+(Sum of digits)² – Sum the digits, then square the sum.
+Examples: 12 → 9 ((1+2) 
+2
+ =3 
+2
+ ), 34 → 49 ((3+4) 
+2
+ =7 
+2
+ )
+Test Inputs & Outputs:
+5 → 25 (5 
+2
+ )
+10 → 1 (1 
+2
+ )
+11 → 4 (2 
+2
+ )
+23 → 25 (5 
+2
+ )
+50 → 25 (5 
+2
+ )
+101 → 4 (2 
+2
+ )
+123 → 36 (6 
+2
+ )
+205 → 49 (7 
+2
+ )
+Count of digits that divide the number – Check each digit d (if d>0), count if n % d == 0.
+Examples: 12 → 2 (1, 2), 124 → 3 (1, 2, 4), 36 → 2 (3, 6)
+Test Inputs & Outputs:
+1 → 1 (1)
+2 → 1 (2)
+5 → 1 (5)
+10 → 1 (1)
+24 → 2 (2, 4)
+111 → 3 (1, 1, 1)
+128 → 3 (1, 2, 8)
+396 → 3 (3, 9, 6)
+Sum of all possible 2-digit combinations of the number’s digits – (e.g., 123 -> 12+13+21+23+31+32).
+Examples: 12 → 33 (12+21), 123 → 132 (12+13+21+23+31+32)
+Test Inputs & Outputs:
+11 → 22 (11+11)
+23 → 55 (23+32)
+10 → 11 (10+01)
+45 → 99 (45+54)
+111 → 66 (11+11+11+11+11+11)
+100 → 21 (10+01+10+01+00+00)
+124 → 176 (12+14+21+24+41+42)
+203 → 110 (20+23+02+03+32+30)
+Reverse digits then count odd ones – Reverse, then count odd digits.
+Examples: 123 → 2 (rev=321, odd=3,1), 50 → 1 (rev=05, odd=5)
+Test Inputs & Outputs:
+7 → 1 (rev=7, odd=7)
+10 → 1 (rev=01, odd=1)
+24 → 0 (rev=42, odd=none)
+55 → 2 (rev=55, odd=5,5)
+101 → 2 (rev=101, odd=1,1)
+135 → 3 (rev=531, odd=5,3,1)
+2468 → 0 (rev=8642, odd=none)
+97531 → 5 (rev=13579, odd=1,3,5,7,9)
+Sum of factorials of all even digits – Sum factorials of 0, 2, 4, 6, 8. (0!=1)
+Examples: 123 → 2 (2!), 480 → 40321+64+1=40386 (4!+8!+0!=24+40320+1), 135 → 0
+Test Inputs & Outputs:
+0 → 1 (0!)
+1 → 0
+2 → 2 (2!)
+4 → 24 (4!)
+6 → 720 (6!)
+24 → 26 (2!+4!=2+24)
+80 → 40321 (8!+0!=40320+1)
+168 → 41040 (6!+8!=720+40320)
+Sum of squares of even digits only – Square even digits (0,2,4,6,8) and sum.
+Examples: 1234 → 20 (2 
+2
+ +4 
+2
+ =4+16), 5678 → 100 (6 
+2
+ +8 
+2
+ =36+64), 135 → 0
+Test Inputs & Outputs:
+0 → 0 (0 
+2
+ )
+1 → 0
+2 → 4 (2 
+2
+ )
+8 → 64 (8 
+2
+ )
+24 → 20 (2 
+2
+ +4 
+2
+ )
+60 → 36 (6 
+2
+ +0 
+2
+ )
+182 → 68 (8 
+2
+ +2 
+2
+ =64+4)
+20406 → 56 (2 
+2
+ +0 
+2
+ +4 
+2
+ +0 
+2
+ +6 
+2
+ =4+0+16+0+36)
+Product of middle digits – Multiply digits excluding first and last (return 1 if < 3 digits).
+Examples: 123 → 2, 4567 → 30 (5*6), 99 → 1
+Test Inputs & Outputs:
+8 → 1
+10 → 1
+121 → 2
+5050 → 0 (0*5)
+11111 → 1 (111)
+6384 → 24 (3*8)
+12345 → 24 (234)
+9008 → 0 (0*0)
+Mean of digits (rounded) – Sum digits, divide by count, round to nearest integer (.5 up).
+Examples: 123 → 2 (avg=2), 45 → 5 (avg=4.5->5)
+Test Inputs & Outputs:
+7 → 7 (avg=7)
+10 → 1 (avg=0.5->1)
+25 → 4 (avg=3.5->4)
+99 → 9 (avg=9)
+101 → 1 (avg=0.66->1)
+500 → 2 (avg=1.66->2)
+1234 → 3 (avg=2.5->3)
+888 → 8 (avg=8)
+Sum of digits from binary of reversed number – Reverse n, convert reversed number to binary, sum binary digits.
+Examples: 12 → 2 (rev=21, 21=10101 
+2
+​
+ , sum=3. Why 2?). Recheck: 12->21=10101, sum=3. Example 6 -> rev=6, 6=110 
+2
+​
+ , sum=2. Example 10 -> rev=1, 1=1 
+2
+​
+ , sum=1.
+Examples: 6 → 2, 10 → 1
+Test Inputs & Outputs:
+1 → 1 (rev=1, bin=1, sum=1)
+3 → 2 (rev=3, bin=11, sum=2)
+5 → 2 (rev=5, bin=101, sum=2)
+11 → 3 (rev=11, bin=1011, sum=3)
+13 → 3 (rev=31, bin=11111, sum=5. Why 3?) Recheck: 13->31=11111, sum=5.
+21 → 3 (rev=12, bin=1100, sum=2. Why 3?) Recheck: 21->12=1100, sum=2.
+100 → 1 (rev=1, bin=1, sum=1)
+101 → 3 (rev=101, bin=1100101, sum=4. Why 3?) Recheck: 101->101=1100101, sum=4.
+Corrected Examples/Tests: (Using correct logic)
+Examples: 6 → 2, 10 → 1
+Test Inputs & Outputs:
+1 → 1
+3 → 2
+5 → 2
+11 → 3
+13 → 5
+21 → 2
+100 → 1
+101 → 4
+(Sum of digits) mod number of digits – Sum digits, find remainder when divided by digit count. (Handle len=0? No, min len is 1).
+Examples: 123 → 0 (sum=6, len=3, 6%3=0), 45 → 1 (sum=9, len=2, 9%2=1)
+Test Inputs & Outputs:
+7 → 0 (sum=7, len=1, 7%1=0)
+10 → 1 (sum=1, len=2, 1%2=1)
+25 → 1 (sum=7, len=2, 7%2=1)
+99 → 0 (sum=18, len=2, 18%2=0)
+101 → 2 (sum=2, len=3, 2%3=2)
+505 → 1 (sum=10, len=3, 10%3=1)
+1234 → 2 (sum=10, len=4, 10%4=2)
+888 → 0 (sum=24, len=3, 24%3=0)
+Is the input a palindrome in binary? – 1 if yes, else 0. (Same as rule 17).
+Examples: 5 → 1 (101), 9 → 1 (1001), 6 → 0 (110)
+Test Inputs & Outputs:
+1 → 1 (1)
+2 → 0 (10)
+3 → 1 (11)
+7 → 1 (111)
+10 → 0 (1010)
+15 → 1 (1111)
+17 → 1 (10001)
+21 → 1 (10101)
+Return (digit count × sum of digits) – (Same as Rule 101).
+Examples: 123 → 18 (len=3, sum=6, 36=18), 55 → 20 (len=2, sum=10, 210=20)
+Test Inputs & Outputs:
+7 → 7 (len=1, sum=7, 1*7=7)
+10 → 2 (len=2, sum=1, 2*1=2)
+44 → 16 (len=2, sum=8, 2*8=16)
+100 → 3 (len=3, sum=1, 3*1=3)
+111 → 9 (len=3, sum=3, 3*3=9)
+505 → 30 (len=3, sum=10, 3*10=30)
+1234 → 40 (len=4, sum=10, 4*10=40)
+999 → 81 (len=3, sum=27, 3*27=81)
+Return (largest digit × number of digits)
+Examples: 152 → 15 (max=5, len=3, 53=15), 707 → 21 (max=7, len=3, 73=21)
+Test Inputs & Outputs:
+6 → 6 (max=6, len=1, 6*1=6)
+10 → 2 (max=1, len=2, 1*2=2)
+44 → 8 (max=4, len=2, 4*2=8)
+129 → 27 (max=9, len=3, 9*3=27)
+800 → 24 (max=8, len=3, 8*3=24)
+1050 → 20 (max=5, len=4, 5*4=20)
+1111 → 4 (max=1, len=4, 1*4=4)
+9876 → 36 (max=9, len=4, 9*4=36)
+Sum of digits of factorial of number of digits – Find length L, calculate L!, sum digits of L!.
+Examples: 123 → 6 (L=3, 3!=6, sum=6), 55 → 2 (L=2, 2!=2, sum=2), 12345 → 3 (L=5, 5!=120, sum=3)
+Test Inputs & Outputs:
+7 → 1 (L=1, 1!=1, sum=1)
+10 → 2 (L=2, 2!=2, sum=2)
+100 → 6 (L=3, 3!=6, sum=6)
+999 → 6 (L=3, 3!=6, sum=6)
+1000 → 6 (L=4, 4!=24, sum=6)
+1234 → 6 (L=4, 4!=24, sum=6)
+98765 → 3 (L=5, 5!=120, sum=3)
+123456 → 9 (L=6, 6!=720, sum=9)
+Count of digits ≡ 1 mod 3 – Count digits 1, 4, 7.
+Examples: 123 → 1 (1), 456 → 1 (4), 711 → 3 (7,1,1)
+Test Inputs & Outputs:
+0 → 0
+1 → 1 (1)
+2 → 0
+4 → 1 (4)
+7 → 1 (7)
+123 → 1 (1)
+4079 → 2 (4, 7)
+114477 → 6 (1,1,4,4,7,7)
+Number of digits in cube of input – Calculate n 
+3
+ , count its digits.
+Examples: 3 → 2 (3 
+3
+ =27), 5 → 3 (5 
+3
+ =125), 10 → 4 (10 
+3
+ =1000)
+Test Inputs & Outputs:
+1 → 1 (1 
+3
+ =1)
+2 → 1 (2 
+3
+ =8)
+4 → 2 (4 
+3
+ =64)
+6 → 3 (6 
+3
+ =216)
+7 → 3 (7 
+3
+ =343)
+8 → 3 (8 
+3
+ =512)
+20 → 4 (20 
+3
+ =8000)
+100 → 7 (100 
+3
+ =1,000,000)
+Number of unique digits squared – Count unique digits, square the count.
+Examples: 123 → 9 (3 
+2
+ ), 112 → 4 (2 
+2
+ ), 505 → 4 (2 
+2
+ )
+Test Inputs & Outputs:
+7 → 1 (1 
+2
+ )
+10 → 4 (2 
+2
+ )
+88 → 1 (1 
+2
+ )
+121 → 4 (2 
+2
+ )
+1000 → 4 (2 
+2
+ )
+1234 → 16 (4 
+2
+ )
+5050 → 4 (2 
+2
+ )
+98769 → 16 (4 
+2
+ )
+Average of even digits (rounded) – Sum even digits, divide by count of even digits, round (.5 up). (Return 0 if no even digits).
+Examples: 1234 → 3 (sum=2+4=6, count=2, avg=3), 5678 → 7 (sum=6+8=14, count=2, avg=7), 135 → 0
+Test Inputs & Outputs:
+0 → 0 (sum=0, count=1, avg=0)
+2 → 2 (sum=2, count=1, avg=2)
+8 → 8 (sum=8, count=1, avg=8)
+24 → 3 (sum=6, count=2, avg=3)
+60 → 3 (sum=6, count=2, avg=3)
+182 → 5 (sum=10, count=2, avg=5)
+20406 → 3 (sum=12, count=5, avg=2.4 -> 2. Why 3?). Recheck: 2+0+4+0+6 = 12. Count = 5. Avg = 2.4. Rounds to 2.
+888 → 8 (sum=24, count=3, avg=8)
+Corrected Examples/Tests:
+Examples: 1234 → 3, 5678 → 7, 135 → 0
+Test Inputs & Outputs:
+0 → 0
+2 → 2
+8 → 8
+24 → 3
+60 → 3
+182 → 5
+20406 → 2
+888 → 8
+Count of digits equal to length of number – Count how many digits d satisfy d=L, where L is the number of digits.
+Examples: 123 → 1 (digit 3, len=3), 22 → 2 (digit 2, len=2; digit 2, len=2), 41 → 0 (len=2, digits 4,1)
+Test Inputs & Outputs:
+1 → 1 (digit 1, len=1)
+5 → 0 (digit 5, len=1)
+12 → 0 (len=2, digits 1,2)
+21 → 1 (len=2, digit 1) - Wait, digit is 1, len is 2. No. Digit is 2, len is 2. Yes! Count=1.
+22 → 2 (len=2, digits 2,2)
+123 → 1 (len=3, digit 3)
+333 → 3 (len=3, digits 3,3,3)
+1234 → 1 (len=4, digit 4)
+4444 → 4 (len=4, digits 4,4,4,4)
+Corrected Examples/Tests:
+Examples: 123 → 1, 22 → 2, 41 → 0
+Test Inputs & Outputs:
+1 → 1
+5 → 0
+12 → 0
+21 → 1
+22 → 2
+123 → 1
+333 → 3
+1234 → 1
+4444 → 4

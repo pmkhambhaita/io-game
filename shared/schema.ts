@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, array } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -16,12 +16,12 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
-// Puzzle Schema
+// Puzzle Schema - using jsonb for array storage
 export const puzzles = pgTable("puzzles", {
   id: serial("id").primaryKey(),
   rule: text("rule").notNull(),
-  inputs: text("inputs").array().notNull(),
-  outputs: text("outputs").array().notNull(),
+  inputs: jsonb("inputs").notNull().$type<string[]>(),
+  outputs: jsonb("outputs").notNull().$type<string[]>(),
 });
 
 export const insertPuzzleSchema = createInsertSchema(puzzles).pick({
