@@ -105,13 +105,9 @@ export default function ImportPuzzlesModal({ onClose }: ImportPuzzlesModalProps)
         const inputs = allInputOutput.map(item => String(item.input));
         const outputs = allInputOutput.map(item => String(item.output));
         
-        // Trim to 6 items max (or pad if less than 6)
-        const finalInputs = inputs.slice(0, 6);
-        const finalOutputs = outputs.slice(0, 6);
-        
-        // Pad arrays if needed to ensure length of 6
-        while (finalInputs.length < 6) finalInputs.push("");
-        while (finalOutputs.length < 6) finalOutputs.push("");
+        // Use all available input/output pairs - don't limit to 6
+        const finalInputs = inputs;
+        const finalOutputs = outputs;
         
         return {
           rule: puzzle.rule,

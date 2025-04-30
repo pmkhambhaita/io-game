@@ -31,16 +31,8 @@ export default function ManagePuzzlesModal({
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-2xl bg-gray-800 border-gray-700 text-white">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-blue-400 flex items-center justify-between">
+          <DialogTitle className="text-2xl font-semibold text-blue-400">
             Manage Puzzles
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="h-6 w-6 rounded-full p-0 text-gray-400 hover:text-red-400"
-            >
-              <X className="h-4 w-4" />
-            </Button>
           </DialogTitle>
         </DialogHeader>
         
