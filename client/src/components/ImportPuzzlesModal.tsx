@@ -3,7 +3,8 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X, Upload, AlertCircle } from "lucide-react";
@@ -177,6 +178,9 @@ export default function ImportPuzzlesModal({ onClose }: ImportPuzzlesModalProps)
               <X className="h-4 w-4" />
             </Button>
           </DialogTitle>
+          <DialogDescription className="text-gray-300">
+            Import your puzzles in JSON format with examples and test cases.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">

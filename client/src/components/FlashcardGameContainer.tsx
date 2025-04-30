@@ -322,7 +322,7 @@ export default function FlashcardGameContainer({
             >
               {isCardFlipped 
                 ? <><Eye className="h-4 w-4 mr-2" /> Mark Complete</>
-                : <><EyeOff className="h-4 w-4 mr-2" /> Skip</>}
+                : <><ChevronRight className="h-4 w-4 mr-2" /> Next</>}
             </Button>
           </div>
           

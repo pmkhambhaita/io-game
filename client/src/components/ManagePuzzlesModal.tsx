@@ -3,7 +3,8 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogDescription
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X, Plus, Edit, Trash, Upload } from "lucide-react";
@@ -34,6 +35,9 @@ export default function ManagePuzzlesModal({
           <DialogTitle className="text-2xl font-semibold text-blue-400">
             Manage Puzzles
           </DialogTitle>
+          <DialogDescription className="text-gray-300">
+            Add, edit, delete or import puzzles for your game.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="mb-6 flex flex-wrap gap-3">
