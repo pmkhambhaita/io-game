@@ -6,6 +6,7 @@ import InstructionsModal from "@/components/InstructionsModal";
 import ManagePuzzlesModal from "@/components/ManagePuzzlesModal";
 import PuzzleFormModal from "@/components/PuzzleFormModal";
 import DeleteConfirmationModal from "@/components/DeleteConfirmationModal";
+import ImportPuzzlesModal from "@/components/ImportPuzzlesModal";
 import { usePuzzles } from "@/hooks/usePuzzles";
 import { Puzzle } from "@shared/schema";
 
@@ -17,6 +18,7 @@ export default function Game() {
   const [isManagePuzzlesOpen, setIsManagePuzzlesOpen] = useState(false);
   const [isPuzzleFormOpen, setIsPuzzleFormOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   
   // Form states
   const [isEditMode, setIsEditMode] = useState(false);
@@ -51,6 +53,12 @@ export default function Game() {
     setCurrentPuzzleId(null);
     setIsManagePuzzlesOpen(false);
     setIsPuzzleFormOpen(true);
+  };
+
+  // Import puzzles
+  const handleImportPuzzles = () => {
+    setIsManagePuzzlesOpen(false);
+    setIsImportModalOpen(true);
   };
 
   // Edit puzzle
@@ -101,6 +109,7 @@ export default function Game() {
             onAdd={handleAddPuzzle}
             onEdit={handleEditPuzzle}
             onDelete={handleDeleteClick}
+            onImport={handleImportPuzzles}
           />
         )}
         
@@ -125,6 +134,15 @@ export default function Game() {
               if (currentPuzzleId === currentPuzzle?.id) {
                 setSelectedPuzzleIndex(0);
               }
+            }}
+          />
+        )}
+        
+        {isImportModalOpen && (
+          <ImportPuzzlesModal 
+            onClose={() => {
+              setIsImportModalOpen(false);
+              setIsManagePuzzlesOpen(true);
             }}
           />
         )}

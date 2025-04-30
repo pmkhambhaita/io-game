@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPuzzleSchema } from "@shared/schema";
+import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoints for puzzles
@@ -46,6 +47,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(newPuzzle);
     } catch (error) {
       res.status(500).json({ message: "Failed to create puzzle" });
+    }
+  });
+
+  // Bulk import puzzles
+  app.post("/api/puzzles/import", async (req, res) => {
+    try {
+      // Validate request body structure
+      const bulkImportSchema = z.object({
+        puzzles: z.array(insertPuzzleSchema)
+      });
+      
+      const parsedBody = bulkImportSchema.safeParse(req.body);
+      if (!parsedBody.success) {
+        return res.status(400).json({ 
+          message: "Invalid import data", 
+          errors: parsedBody.error.format() 
+        });
+      }
+
+      const { puzzles } = parsedBody.data;
+      
+      // Create each puzzle and collect results
+      const results = [];
+      for (const puzzleData of puzzles) {
+        try {
+          const newPuzzle = await storage.createPuzzle(puzzleData);
+          results.push({
+            success: true,
+            puzzle: newPuzzle
+          });
+        } catch (error) {
+          results.push({
+            success: false,
+            error: "Failed to create puzzle"
+          });
+        }
+      }
+      
+      res.status(201).json({ 
+        success: true,
+        imported: results.filter(r => r.success).length,
+        total: puzzles.length,
+        results
+      });
+    } catch (error) {
+      console.error("Import error:", error);
+      res.status(500).json({ message: "Failed to import puzzles" });
     }
   });
 

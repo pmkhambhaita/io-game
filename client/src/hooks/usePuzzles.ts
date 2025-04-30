@@ -86,6 +86,28 @@ export const usePuzzles = () => {
     },
   });
 
+  // Bulk import puzzles
+  const importPuzzlesMutation = useMutation({
+    mutationFn: async (puzzles: Omit<Puzzle, "id">[]) => {
+      const res = await apiRequest("POST", "/api/puzzles/import", { puzzles });
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/puzzles"] });
+      toast({
+        title: "Success",
+        description: "Puzzles imported successfully",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: `Failed to import puzzles: ${error.message}`,
+        variant: "destructive",
+      });
+    },
+  });
+
   return {
     puzzles,
     isLoading,
@@ -94,8 +116,10 @@ export const usePuzzles = () => {
     createPuzzle: createPuzzleMutation.mutate,
     updatePuzzle: updatePuzzleMutation.mutate,
     deletePuzzle: deletePuzzleMutation.mutate,
+    importPuzzles: importPuzzlesMutation.mutate,
     isCreating: createPuzzleMutation.isPending,
     isUpdating: updatePuzzleMutation.isPending,
     isDeleting: deletePuzzleMutation.isPending,
+    isImporting: importPuzzlesMutation.isPending,
   };
 };

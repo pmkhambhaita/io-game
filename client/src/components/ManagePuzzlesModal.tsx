@@ -6,7 +6,7 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X, Plus, Edit, Trash } from "lucide-react";
+import { X, Plus, Edit, Trash, Upload } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Puzzle } from "@shared/schema";
 
@@ -16,6 +16,7 @@ interface ManagePuzzlesModalProps {
   onAdd: () => void;
   onEdit: (puzzle: Puzzle) => void;
   onDelete: (id: number) => void;
+  onImport?: () => void;
 }
 
 export default function ManagePuzzlesModal({ 
@@ -23,7 +24,8 @@ export default function ManagePuzzlesModal({
   onClose, 
   onAdd, 
   onEdit, 
-  onDelete 
+  onDelete,
+  onImport
 }: ManagePuzzlesModalProps) {
   return (
     <Dialog open={true} onOpenChange={onClose}>
@@ -42,13 +44,22 @@ export default function ManagePuzzlesModal({
           </DialogTitle>
         </DialogHeader>
         
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap gap-3">
           <Button 
             onClick={onAdd}
             className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             <Plus className="h-4 w-4 mr-2" /> Add New Puzzle
           </Button>
+          
+          {onImport && (
+            <Button 
+              onClick={onImport}
+              className="bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              <Upload className="h-4 w-4 mr-2" /> Import Puzzles
+            </Button>
+          )}
         </div>
         
         <ScrollArea className="max-h-96 pr-2 space-y-3">
